@@ -8,7 +8,7 @@ class ProcessView(BrowserView):
     data = {}
     
     def __call__(self):
-        url = self.request.params.get('url','')
+        url = self.request.form.get('url','')
        
         if url:
             u = urllib.urlopen(url + '/listing_content')
