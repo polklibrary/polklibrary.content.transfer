@@ -30,8 +30,8 @@ class ExportView(BrowserView):
 
         
     def _general(self, obj):
-        self.data['Title'] = self.context.Title
-        self.data['Description'] = self.context.Description
+        self.data['Title'] = self.context.Title()
+        self.data['Description'] = self.context.Description()
         self.data['portal_type'] = self.context.portal_type
         self.data['Creator'] = self.context.Creator()
         self.data['location'] = self.context.getLocation()
