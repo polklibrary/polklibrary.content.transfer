@@ -1,7 +1,7 @@
 from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 
-import json
+import json,urllib
 
 class ExportView(BrowserView):
 
@@ -46,8 +46,8 @@ class ExportView(BrowserView):
         if self.context.portal_type != 'Document':
             return
     
-        self.data['body_raw'] = self.context.getRawText()
-        self.data['body'] = self.context.getText()
+        self.data['body_raw'] = urllib.quote(self.context.getRawText())
+        self.data['body'] = urllib.quote(self.context.getText())
         
         
     def _image(self, obj):
