@@ -13,7 +13,10 @@ class ExportView(BrowserView):
     
         context_state = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
         canonical_object = context_state.canonical_object()
-    
+        
+        print '-------------------------'
+        print self.context.portal_type
+        print canonical_object.portal_type
     
         self._general(canonical_object)
         self._folder(canonical_object)
