@@ -11,9 +11,12 @@ class ListingView(BrowserView):
     
     def __call__(self):
     
-        print self.context.absolute_url_path()
-        print self.context.getPhysicalPath()
-        print self.context.virtual_url_path()
+        start_path = self.context.absolute_url_path()
+        
+        brains = self.context.portal_catalog.searchResults(path={'query' : start_path})
+        
+        for brain in brains:
+            print brain.Title
         
        
         return json.dumps(self.data)
