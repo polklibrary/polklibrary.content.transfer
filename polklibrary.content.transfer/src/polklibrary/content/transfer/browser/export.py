@@ -55,7 +55,7 @@ class ExportView(BrowserView):
             return
         
     def _link(self, obj):
-        if self.context.portal_type != 'Link':
+        if self.context.portal_type != 'LibraryLink':
             return
             
         self.data['getRemoteUrl'] = self.context.getRemoteUrl()
