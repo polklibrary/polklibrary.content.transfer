@@ -29,12 +29,12 @@ class ExportView(BrowserView):
         
         
     def _folder(self):
-        if context.portal_type == 'Folder':
+        if self.context.portal_type == 'Folder':
             return
     
     
     def _page(self):
-        if context.portal_type == 'Document':
+        if self.context.portal_type == 'Document':
             return
     
         self.data['body_raw'] = self.context.getRawText()
@@ -42,11 +42,11 @@ class ExportView(BrowserView):
         
         
     def _image(self):
-        if context.portal_type == 'Image':
+        if self.context.portal_type == 'Image':
             return
         
     def _link(self):
-        if context.portal_type == 'Link':
+        if self.context.portal_type == 'Link':
             return
             
         self.data['getRemoteUrl'] = self.context.getRemoteUrl
