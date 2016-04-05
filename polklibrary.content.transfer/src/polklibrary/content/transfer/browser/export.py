@@ -11,21 +11,21 @@ class ExportView(BrowserView):
     def __call__(self):
         self.data = {}
     
-        context_state = getMultiAdapter((context, request), name=u'plone_context_state')
+        context_state = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
         canonical_object = context_state.canonical_object()
     
     
-        self._general()
-        self._folder()
-        self._page()
-        self._image()
-        self._link()
+        self._general(canonical_object)
+        self._folder(canonical_object)
+        self._page(canonical_object)
+        self._image(canonical_object)
+        self._link(canonical_object)
         
         
         return json.dumps(self.data)
 
         
-    def _general(self):
+    def _general(self, obj):
         self.data['Title'] = self.context.Title
         self.data['Description'] = self.context.Description
         self.data['portal_type'] = self.context.portal_type
@@ -33,28 +33,28 @@ class ExportView(BrowserView):
         self.data['location'] = self.context.getLocation()
         
         
-    def _folder(self):
-        if self.context.portal_type == 'Folder':
+    def _folder(self, obj):
+        if obj.portal_type == 'Folder':
             return
     
     
-    def _page(self):
-        if self.context.portal_type == 'Document':
+    def _page(self, obj):
+        if obj.portal_type == 'Document':
             return
     
-        self.data['body_raw'] = self.context.getRawText()
-        self.data['body'] = self.context.getText()
+        self.data['body_raw'] = obj.getRawText()
+        self.data['body'] = obj.getText()
         
         
-    def _image(self):
-        if self.context.portal_type == 'Image':
+    def _image(self, obj):
+        if obj.portal_type == 'Image':
             return
         
-    def _link(self):
-        if self.context.portal_type == 'Link':
+    def _link(self, obj):
+        if obj.portal_type == 'Link':
             return
             
-        self.data['getRemoteUrl'] = self.context.getRemoteUrl
+        self.data['getRemoteUrl'] = obj.getRemoteUrl
         
         
         
