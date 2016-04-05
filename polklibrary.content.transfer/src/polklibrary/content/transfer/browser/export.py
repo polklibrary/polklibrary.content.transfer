@@ -24,7 +24,7 @@ class ExportView(BrowserView):
         self.data['Description'] = self.context.Description
         self.data['portal_type'] = self.context.portal_type
         self.data['Creator'] = self.context.Creator
-        self.data['location'] = self.context.location
+        self.data['location'] = self.context.getLocation()
         self.data['getRemoteUrl'] = self.context.getRemoteUrl
         
         
