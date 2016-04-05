@@ -5,12 +5,8 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="polklibrary.content.transfer">
 
-  <includeDependencies package="." />
-
-  <i18n:registerTranslations directory="locales" />
 
   <include package=".browser" />
-
 
   <genericsetup:registerProfile
       name="default"
