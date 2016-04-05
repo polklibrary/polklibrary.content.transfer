@@ -14,6 +14,7 @@ class ExportView(BrowserView):
         self._folder()
         self._page()
         self._image()
+        self._link()
         
         
         return json.dumps(self.data)
@@ -25,7 +26,6 @@ class ExportView(BrowserView):
         self.data['portal_type'] = self.context.portal_type
         self.data['Creator'] = self.context.Creator
         self.data['location'] = self.context.getLocation()
-        self.data['getRemoteUrl'] = self.context.getRemoteUrl
         
         
     def _folder(self):
@@ -45,8 +45,11 @@ class ExportView(BrowserView):
         if context.portal_type == 'Image':
             return
         
-        
-        
+    def _link(self):
+        if context.portal_type == 'Link':
+            return
+            
+        self.data['getRemoteUrl'] = self.context.getRemoteUrl
         
         
         
