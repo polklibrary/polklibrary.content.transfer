@@ -38,27 +38,27 @@ class ExportView(BrowserView):
         
         
     def _folder(self, obj):
-        if obj.portal_type != 'Folder':
+        if self.context.portal_type != 'Folder':
             return
     
     
     def _page(self, obj):
-        if obj.portal_type != 'Document':
+        if self.context.portal_type != 'Document':
             return
     
-        self.data['body_raw'] = obj.getRawText()
-        self.data['body'] = obj.getText()
+        self.data['body_raw'] = self.context.getRawText()
+        self.data['body'] = self.context.getText()
         
         
     def _image(self, obj):
-        if obj.portal_type != 'Image':
+        if self.context.portal_type != 'Image':
             return
         
     def _link(self, obj):
-        if obj.portal_type != 'Link':
+        if self.context.portal_type != 'Link':
             return
             
-        self.data['getRemoteUrl'] = obj.getRemoteUrl
+        self.data['getRemoteUrl'] = self.context.getRemoteUrl()
         
         
         
