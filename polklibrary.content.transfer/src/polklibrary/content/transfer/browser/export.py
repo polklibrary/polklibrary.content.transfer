@@ -20,12 +20,12 @@ class ExportView(BrowserView):
 
         
     def _general(self):
-        data['Title'] = self.context.Title
-        data['Description'] = self.context.Description
-        data['portal_type'] = self.context.portal_type
-        data['Creator'] = self.context.Creator
-        data['location'] = self.context.location
-        data['getRemoteUrl'] = self.context.getRemoteUrl
+        self.data['Title'] = self.context.Title
+        self.data['Description'] = self.context.Description
+        self.data['portal_type'] = self.context.portal_type
+        self.data['Creator'] = self.context.Creator
+        self.data['location'] = self.context.location
+        self.data['getRemoteUrl'] = self.context.getRemoteUrl
         
         
     def _folder(self):
@@ -37,8 +37,8 @@ class ExportView(BrowserView):
         if context.portal_type == 'Document':
             return
     
-        data['body_raw'] = self.context.getRawText()
-        data['body'] = self.context.getText()
+        self.data['body_raw'] = self.context.getRawText()
+        self.data['body'] = self.context.getText()
         
         
     def _image(self):
