@@ -1,4 +1,5 @@
 from Products.Five import BrowserView
+from zope.component import getMultiAdapter
 
 import json
 
@@ -9,6 +10,10 @@ class ExportView(BrowserView):
 
     def __call__(self):
         self.data = {}
+    
+        context_state = getMultiAdapter((context, request), name=u'plone_context_state')
+        canonical_object = context_state.canonical_object()
+    
     
         self._general()
         self._folder()
