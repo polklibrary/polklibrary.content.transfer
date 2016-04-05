@@ -18,6 +18,7 @@ class ExportView(BrowserView):
         print self.context.portal_type
         print canonical_object.portal_type
     
+    
         self._general(canonical_object)
         self._folder(canonical_object)
         self._page(canonical_object)
@@ -32,7 +33,7 @@ class ExportView(BrowserView):
         self.data['Title'] = self.context.Title
         self.data['Description'] = self.context.Description
         self.data['portal_type'] = self.context.portal_type
-        self.data['Creator'] = self.context.Creator
+        self.data['Creator'] = self.context.Creator()
         self.data['location'] = self.context.getLocation()
         
         
