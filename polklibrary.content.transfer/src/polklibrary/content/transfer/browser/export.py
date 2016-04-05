@@ -10,26 +10,18 @@ class ExportView(BrowserView):
 
     def __call__(self):
         self.data = {}
-    
-        context_state = getMultiAdapter((self.context, self.request), name=u'plone_context_state')
-        canonical_object = context_state.canonical_object()
-        
-        print '-------------------------'
-        print self.context.portal_type
-        print canonical_object.portal_type
-    
-    
-        self._general(canonical_object)
-        self._folder(canonical_object)
-        self._page(canonical_object)
-        self._image(canonical_object)
-        self._link(canonical_object)
+   
+        self._general()
+        self._folder()
+        self._page()
+        self._image()
+        self._link()
         
         
         return json.dumps(self.data)
 
         
-    def _general(self, obj):
+    def _general(self):
         self.data['Title'] = self.context.Title()
         self.data['Description'] = self.context.Description()
         self.data['portal_type'] = self.context.portal_type
@@ -37,12 +29,12 @@ class ExportView(BrowserView):
         self.data['location'] = self.context.getLocation()
         
         
-    def _folder(self, obj):
+    def _folder(self):
         if self.context.portal_type != 'Folder':
             return
     
     
-    def _page(self, obj):
+    def _page(self):
         if self.context.portal_type != 'Document':
             return
     
@@ -50,11 +42,11 @@ class ExportView(BrowserView):
         self.data['body'] = urllib.quote(self.context.getText())
         
         
-    def _image(self, obj):
+    def _image(self):
         if self.context.portal_type != 'Image':
             return
         
-    def _link(self, obj):
+    def _link(self):
         if self.context.portal_type != 'LibraryLink':
             return
             

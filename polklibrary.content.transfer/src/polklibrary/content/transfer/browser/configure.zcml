@@ -12,6 +12,19 @@
         permission="zope2.View"
         />
     
+    <browser:page
+        for="*"
+        name="listing_content"
+        class=".listing.ListingView"
+        permission="zope2.View"
+        />
+    
+    <browser:page
+        for="*"
+        name="process_content"
+        class=".process.ProcessView"
+        permission="zope2.View"
+        />
     
     
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
